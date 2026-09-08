@@ -1,0 +1,16 @@
+package io.github.lz007001cn.qatrack.dao;
+
+import io.github.lz007001cn.qatrack.model.TestPlanCase;
+import java.util.*;
+
+/** Current plan scope; caller checks project/parent status and coordinates parent updates. */
+public interface TestPlanCaseDao {
+    TestPlanCase add(TestPlanCase value);
+    Optional<TestPlanCase> find(Long testPlanId, Long testCaseId);
+    boolean exists(Long testPlanId, Long testCaseId);
+    /** Frozen presentation order: case key_no, with case ID as stable tie breaker. */
+    List<TestPlanCase> listByTestPlan(Long testPlanId);
+    List<TestPlanCase> listByTestCase(Long testCaseId);
+    /** Physical removal of the association only. */
+    boolean remove(Long testPlanId, Long testCaseId);
+}

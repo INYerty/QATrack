@@ -5,7 +5,7 @@
 
 ## 修改前的仓库
 
-- 根目录：`E:/Projects/QATrack`，分支 `main` 跟踪 `origin/main`，工作区干净。
+- 根目录：`<PROJECT_ROOT>`，分支 `main` 跟踪 `origin/main`，工作区干净。
 - 本地 HEAD 与 `git ls-remote origin refs/heads/main` 均为
   `9fd1cf43e808786c7bd8b86c7c7cf9fa81b20a3b`。
 - 远程：`https://github.com/lz007001cn/QATrack.git`，fetch/push 地址一致。
@@ -25,9 +25,9 @@
 | 默认终端 Java | Microsoft OpenJDK 11.0.16.1 |
 | 默认终端 Maven | `mvn` 无法识别，未加入当前 PATH |
 | 可用 JDK 21 | Microsoft OpenJDK 21.0.12.1，实际运行成功 |
-| JDK 21 路径 | `C:/Users/Alienware/.jdks/ms-21.0.12.1` |
+| JDK 21 路径 | `<JDK_21_HOME>` |
 | 可用 Maven | IDEA 自带 Apache Maven 3.9.16，实际运行成功 |
-| Maven 路径 | `D:/JetBrains/IntelliJ IDEA 2026.2.2/plugins/maven-plugin/lib/maven3` |
+| Maven 路径 | `<MAVEN_HOME>` |
 | IDEA 项目 | 已关联 `pom.xml`，SDK 为 `ms-21`，语言级别 JDK 21 |
 | IDEA Maven importer / runner | 已检查项目文件中未发现显式 JDK 覆盖；未通过 IDEA UI 验证实际执行 |
 | MySQL | `MySQL80` 服务运行中，对应服务二进制版本为 8.0.46 |
@@ -43,9 +43,9 @@
 其他开发者应使用自己的 JDK 21 和 Maven 3.9.x。
 
 ```powershell
-Set-Location -LiteralPath 'E:/Projects/QATrack'
-$env:JAVA_HOME = 'C:/Users/Alienware/.jdks/ms-21.0.12.1'
-$qatrackMavenBin = 'D:/JetBrains/IntelliJ IDEA 2026.2.2/plugins/maven-plugin/lib/maven3/bin'
+Set-Location -LiteralPath '<PROJECT_ROOT>'
+$env:JAVA_HOME = '<JDK_21_HOME>'
+$qatrackMavenBin = '<MAVEN_HOME>/bin'
 $env:Path = "$env:JAVA_HOME/bin;$qatrackMavenBin;$env:Path"
 
 java -version
@@ -106,7 +106,7 @@ mvn clean package
 
 ## 课程资料对照
 
-来源：用户提供的 `D:/Download/课程要求.pptx`，已提取全部 12 页文本。
+来源：用户提供的 `课程要求.pptx`，已提取全部 12 页文本。
 以下为后续验收约束，不表示本轮已实现：
 
 - 第 4 页：2 人小组、分工表、教师数据库评审、至少 3NF、每表至少 10 条测试数据。

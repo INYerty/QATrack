@@ -22,7 +22,7 @@
 早期探针/验证库在收尾时清除，最终验证库保留供复查。
 
 使用 MySQL Community Server **8.0.46 Win64** 现有二进制启动独立实例，监听 127.0.0.1:13306，未开启 MySQL X。
-数据目录为 E:/Projects/QATrack-local-validation/freeze-v1-20260906/data；InnoDB 页为 16384 字节，全表 DYNAMIC。
+数据目录为 <PROJECT_ROOT>/../QATrack-local-validation/freeze-v1-20260906/data；InnoDB 页为 16384 字节，全表 DYNAMIC。
 foreign_key_checks=1，严格 SQL 模式、执行会话 UTC；未禁用 FK/CHECK，未用 --force、IGNORE 或 upsert 掩盖错误。
 未改 MySQL80 Windows 服务、账户、配置及已有数据库。验证实例收尾正常关闭，数据仍保留在 E 盘。
 

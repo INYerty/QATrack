@@ -18,3 +18,13 @@ logs/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Local course submission materials
+docs/submission/
+docs/submission/
+
+# Local verification artifacts
+docs/verification/
+docs/verification/
+
+docs/verification/

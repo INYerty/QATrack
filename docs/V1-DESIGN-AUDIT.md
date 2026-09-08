@@ -2,7 +2,7 @@
 
 > 本文保留当时 20 表模型的审计经过，不代表当前结构。后续已宣布 [Freeze v1.0](DOMAIN-FREEZE-v1.0.md)，采用 Run 直接保存 project_id，最终为 19 表、154 字段、40 FK。当前依据见 [数据库设计](DATABASE-DESIGN-DRAFT.md) 和 [实测报告](DATABASE-VALIDATION-v1.0.md)。
 
-日期：2026-09-06。依据：重新读取 E:\Projects\QATrack 工作区当前的 [领域模型](DOMAIN-MODEL.md)、[数据库草案](DATABASE-DESIGN-DRAFT.md) 和 [ER](V1-ER.mmd)，逐项核对后修正文档。
+日期：2026-09-06。依据：重新读取 <PROJECT_ROOT> 工作区当前的 [领域模型](DOMAIN-MODEL.md)、[数据库草案](DATABASE-DESIGN-DRAFT.md) 和 [ER](V1-ER.mmd)，逐项核对后修正文档。
 范围仅为设计收尾：不增加表、字段或产品功能，不实现 Java、不创建正式 DDL、不连接数据库、不 commit/push。
 
 ## 1. 最终规模与表职责

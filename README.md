@@ -5,8 +5,9 @@ Software Test & Quality Management Platform · 软件测试与质量管理平台
 以可追踪性为核心，将需求、测试用例、测试计划、测试执行、测试结果与缺陷关联起来。
 项目用于《Web应用开发实践》课程设计，并计划作为长期维护的个人项目。
 
-当前已完成 Maven WAR 骨架，并宣布 QATrack V1 Domain Model Freeze v1.0。
-19 表数据库结构、680 条测试数据及 SQL 验证已在 MySQL 8.0.46 执行；尚无 Java/前端业务实现，空 WAR 不代表应用可用。
+当前进入 Phase 2 Round 1：JDBC Persistence Foundation。
+V1 冻结的 19 表结构保持不变；已实现可配置连接池、事务入口、User / Project Model 与 DAO。
+尚无业务 Service、Servlet、Authentication 或前端；WAR 包含持久化基础设施，尚不是可交互应用。
 
 ## 技术约束
 
@@ -18,8 +19,8 @@ Software Test & Quality Management Platform · 软件测试与质量管理平台
 - 前端采用 HTML、CSS、JavaScript、jQuery、Bootstrap、Bootstrap Table、ECharts 和 AJAX。
 - 后续使用 JUnit 5、Mockito、JaCoCo 验证 Service，核心业务覆盖率至少 60%。
 
-目前 POM 不包含应用依赖。实现首个 Servlet 时再加入 Servlet API 6.0 的 `provided` 依赖，
-其余依赖随对应功能引入。
+本轮只加入 MySQL Connector/J 9.7.0 与 JUnit 5.13.4（test scope），以及支持 JUnit 5 的 Surefire。
+实现首个 Servlet 时再加入 Servlet API 6.0 的 `provided` 依赖，其余依赖随功能引入。
 
 ## 目录
 
@@ -28,6 +29,8 @@ docs/                         审计和后续设计文档
 src/main/java/io/github/lz007001cn/qatrack/
   model/                      数据模型
   dao/                        DAO 接口及 JDBC 实现
+  config/                     默认配置、外部文件与环境变量加载
+  jdbc/                       自定义连接池与事务入口
   service/                    业务规则与事务
   servlet/                    HTTP 接口
   util/                       职责明确的基础工具
@@ -35,14 +38,15 @@ src/main/java/io/github/lz007001cn/qatrack/
 src/main/resources/           应用资源
 src/main/webapp/WEB-INF/       Web 应用配置
 src/main/webapp/static/        css、js、images
-src/test/java/                后续测试
+config/                      可提交配置示例；*.local.properties 忽略
+src/test/java/                配置、连接池、事务及 MySQL 集成测试
 ```
 
 空目录使用 `.gitkeep` 保留，打包时排除这些占位文件。
 
 ## 构建
 
-先确保终端的 `JAVA_HOME` 指向 JDK 21，`PATH` 包含该 JDK 和 Maven 的 `bin` 目录。
+使用 JDK 21 和 Maven。没有全局 Maven 的 Windows 环境可直接调用 IDEA 自带 Maven，无需修改 PATH，具体命令见 [JDBC 基础设施说明](docs/PHASE2-JDBC-FOUNDATION.md)。
 
 ```shell
 java -version
@@ -51,8 +55,9 @@ mvn validate
 mvn clean package
 ```
 
-输出为 `target/qatrack-0.1.0-SNAPSHOT.war`。目前没有 Java 测试，不产生业务代码覆盖率结论；数据库验证单独见下方入口。
-本机已验证的 PowerShell 环境设置及限制见 [环境审计](docs/ENVIRONMENT-AUDIT.md)。
+输出为 `target/qatrack-0.1.0-SNAPSHOT.war`。普通 `mvn test` 运行不依赖数据库的测试；
+配置独立空测试库后使用 `mvn -Pmysql-tests test` 或 `mvn -Pmysql-tests clean package`，同时运行真实 MySQL 测试。
+集成测试拒绝开发库及非空库，不使用开发 seed。配置、连接生命周期、事务示例和本轮实测见 [Phase 2 JDBC 说明](docs/PHASE2-JDBC-FOUNDATION.md)。
 
 ## IntelliJ IDEA
 
