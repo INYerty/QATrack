@@ -93,6 +93,18 @@ abstract class MysqlFixture {
         try(var c=pool.borrow(); var s=c.createStatement()) {
             // Intentional full cleanup of fixture-owned test tables; keep FK checks enabled.
             //noinspection SqlWithoutWhere
+            s.executeUpdate("DELETE FROM test_attempt_defects");
+            //noinspection SqlWithoutWhere
+            s.executeUpdate("DELETE FROM test_attempts");
+            //noinspection SqlWithoutWhere
+            s.executeUpdate("DELETE FROM defects");
+            //noinspection SqlWithoutWhere
+            s.executeUpdate("DELETE FROM test_run_case_steps");
+            //noinspection SqlWithoutWhere
+            s.executeUpdate("DELETE FROM test_run_cases");
+            //noinspection SqlWithoutWhere
+            s.executeUpdate("DELETE FROM test_runs");
+            //noinspection SqlWithoutWhere
             s.executeUpdate("DELETE FROM test_plan_cases");
             //noinspection SqlWithoutWhere
             s.executeUpdate("DELETE FROM test_case_requirements");
